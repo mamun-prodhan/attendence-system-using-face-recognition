@@ -180,6 +180,32 @@ class Student:
         radionbtn2=ttk.Radiobutton(class_Student_frame,text="No Photo Sample", value="Yes")
         radionbtn2.grid(row=6,column=1)
 
+
+        # buttons frame
+        btn_frame=Frame(class_Student_frame,bd=2,relief=RIDGE,bg="white")
+        btn_frame.place(x=0,y=200,width=705,height=35)
+
+        save_btn=Button(btn_frame,text="Save",width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
+        save_btn.grid(row=0,column=0)
+
+        update_btn=Button(btn_frame,text="Update",width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
+        update_btn.grid(row=0,column=1)
+
+        delete_btn=Button(btn_frame,text="Delete",width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
+        delete_btn.grid(row=0,column=2)
+
+        reset_btn=Button(btn_frame,text="Reset",width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
+        reset_btn.grid(row=0,column=3)
+
+        btn_frame1=Frame(class_Student_frame,bd=2,relief=RIDGE,bg="white")
+        btn_frame1.place(x=0,y=235,width=705,height=35)
+
+        take_photo_btn=Button(btn_frame1,text="Take Photo Sample",width=39,font=("times new roman",12,"bold"),bg="blue",fg="white")
+        take_photo_btn.grid(row=0,column=0)
+
+        update_photo_btn=Button(btn_frame1,text="Update Photo Sample",width=39,font=("times new roman",12,"bold"),bg="blue",fg="white")
+        update_photo_btn.grid(row=0,column=1)
+
         
         
 
