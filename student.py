@@ -207,15 +207,83 @@ class Student:
         update_photo_btn.grid(row=0,column=1)
 
         
-        
-
-
-
-
-
         #Right label frame
         Right_frame=LabelFrame(main_frame,bd=2,bg="white",relief=RIDGE,text="Student Details",font=("times new roman",12,"bold"))
         Right_frame.place(x=740,y=10,width=720,height=580)
+
+        img_right=Image.open(r"C:\attendence-system-using-face-recognition\college_images\studentdetails2.jpg")
+        img_right=img_right.resize((710,130),Image.ANTIALIAS)
+        self.photoimg_right=ImageTk.PhotoImage(img_right)
+
+        f_lbl=Label(Right_frame,image=self.photoimg_right)
+        f_lbl.place(x=5,y=0,width=710,height=130)
+
+        # =================Search System================
+        # Search frame information
+        Search_frame=LabelFrame(Right_frame,bd=2,bg="white",relief=RIDGE,text="Search System",font=("times new roman",12,"bold"))
+        Search_frame.place(x=5,y=135,width=710,height=70)
+
+        search_label=Label(Search_frame,text="Search by:",font=("times new roman",14,"bold"),bg="red",fg="white")
+        search_label.grid(row=0,column=0,padx=10, sticky=W)
+
+        search_combo=ttk.Combobox(Search_frame,font=("times new roman",12,"bold"),width=15,state="read only")
+        search_combo["values"]=("Select","Roll_No","Phone_No")
+        search_combo.current(0)
+        search_combo.grid(row=0,column=1,padx=2,pady=10,sticky=W)
+
+        search_entry=ttk.Entry(Search_frame,width=15,font=("times new roman",12,"bold"))
+        search_entry.grid(row=0,column=2,padx=10,pady=5,sticky=W)
+
+        search_btn=Button(Search_frame,text="Search",width=14,font=("times new roman",12,"bold"),bg="blue",fg="white")
+        search_btn.grid(row=0,column=3,padx=4)
+
+        showAll_btn=Button(Search_frame,text="Show All",width=14,font=("times new roman",12,"bold"),bg="blue",fg="white")
+        showAll_btn.grid(row=0,column=4,padx=4)
+
+        # table frame
+        table_frame=Frame(Right_frame,bd=2,bg="white",relief=RIDGE)
+        table_frame.place(x=5,y=210,width=710,height=350)
+
+        scroll_x=ttk.Scrollbar(table_frame,orient=HORIZONTAL)
+        scroll_y=ttk.Scrollbar(table_frame,orient=VERTICAL)
+
+        self.student_table=ttk.Treeview(table_frame,column=("dep","course","year","sem","id","name","div","dob","email","phone","address","teacher","photo"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
+
+        scroll_x.pack(side=BOTTOM,fill=X)
+        scroll_y.pack(side=RIGHT,fill=Y)
+        scroll_x.config(command=self.student_table.xview)
+        scroll_y.config(command=self.student_table.yview)
+
+        self.student_table.heading("dep",text="Department")
+        self.student_table.heading("course",text="Course")
+        self.student_table.heading("year",text="Year")
+        self.student_table.heading("sem",text="Semester")
+        self.student_table.heading("id",text="StudentId")
+        self.student_table.heading("name",text="Name")
+        self.student_table.heading("div",text="Division")
+        self.student_table.heading("dob",text="DOB")
+        self.student_table.heading("email",text="Email")
+        self.student_table.heading("phone",text="Phone")
+        self.student_table.heading("address",text="Address")
+        self.student_table.heading("teacher",text="Teacher")
+        self.student_table.heading("photo",text="PhotoSampleStatus")
+        self.student_table["show"]="headings"
+
+        self.student_table.column("dep",width=100)
+        self.student_table.column("course",width=100)
+        self.student_table.column("year",width=100)
+        self.student_table.column("sem",width=100)
+        self.student_table.column("id",width=100)
+        self.student_table.column("name",width=100)
+        self.student_table.column("div",width=100)
+        self.student_table.column("dob",width=100)
+        self.student_table.column("email",width=100)
+        self.student_table.column("phone",width=100)
+        self.student_table.column("address",width=100)
+        self.student_table.column("teacher",width=100)
+        self.student_table.column("photo",width=150)
+
+        self.student_table.pack(fill=BOTH,expand=1)
 
 
 
