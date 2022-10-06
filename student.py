@@ -3,7 +3,7 @@ from tkinter import*
 from tkinter import ttk
 from PIL import Image,ImageTk
 from tkinter import messagebox
-# import mysql.connector
+import mysql.connector
 
 class Student: 
     def __init__(self,root):
@@ -195,11 +195,10 @@ class Student:
 
         # radio buttons
         self.var_radio1=StringVar()
-        radionbtn1=ttk.Radiobutton(class_Student_frame,textvariable=self.var_radio1,text="Take Photo Sample", value="Yes")
+        radionbtn1=ttk.Radiobutton(class_Student_frame,variable=self.var_radio1,text="Take Photo Sample", value="Yes")
         radionbtn1.grid(row=6,column=0)
 
-        self.var_radio2=StringVar()
-        radionbtn2=ttk.Radiobutton(class_Student_frame,textvariable=self.var_radio2,text="No Photo Sample", value="Yes")
+        radionbtn2=ttk.Radiobutton(class_Student_frame,variable=self.var_radio1,text="No Photo Sample", value="No")
         radionbtn2.grid(row=6,column=1)
 
 
@@ -311,18 +310,42 @@ class Student:
 
         self.student_table.pack(fill=BOTH,expand=1)
 
-        # =========function declearation===========
+        # =========function declearation=========== database connection
     
     def add_data(self):
         if self.var_dep.get()=="Select Department" or self.var_std_name.get()=="" or self.var_std_id.get()=="":
             messagebox.showerror("Error","All Fields are required",parent=self.root)
-        else: pass
-            
+        else:
+            try:
+                conn=mysql.connector.connect(host="localhost",username="root",password="@mamun@",database="face_recognizer")
+                my_cursor=conn.cursor()
+                my_cursor.execute("insert into student values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
 
+                                                                                                self.var_dep.get(),
+                                                                                                self.var_course.get(),
+                                                                                                self.var_year.get(),
+                                                                                                self.var_semester.get(),
+                                                                                                self.var_std_id.get(),
+                                                                                                self.var_std_name.get(),
+                                                                                                self.var_div.get(),
+                                                                                                self.var_roll.get(),
+                                                                                                self.var_gender.get(),
+                                                                                                self.var_dob.get(),
+                                                                                                self.var_email.get(),
+                                                                                                self.var_phone.get(),
+                                                                                                self.var_address.get(),
+                                                                                                self.var_teacher.get(),
+                                                                                                self.var_radio1.get()
 
+                                                                                            ))
 
+                conn.commit()
+                conn.close()
+                messagebox.showinfo("Success","Student details has been added successfully",parent=self.root)
+            except Exception as es:
+                messagebox.showerror("Error",f"Due To:{str(es)}",parent=self.root)
 
-
+        =============fetch data=============
 
 
 
