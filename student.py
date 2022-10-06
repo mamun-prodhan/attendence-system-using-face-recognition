@@ -216,7 +216,7 @@ class Student:
         update_btn=Button(btn_frame,text="Update",command=self.update_data,width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
         update_btn.grid(row=0,column=1)
 
-        delete_btn=Button(btn_frame,text="Delete",width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
+        delete_btn=Button(btn_frame,text="Delete",command=self.delete_data,width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
         delete_btn.grid(row=0,column=2)
 
         reset_btn=Button(btn_frame,text="Reset",width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
@@ -426,6 +426,34 @@ class Student:
                 conn.close()
             except Exception as es:
                 messagebox.showerror("Error",f"Due To:{str(es)}",parent=self.root)
+
+        # =============delete function==========
+    def delete_data(self):
+            if self.var_std_id.get()=="":
+                messagebox.showerror("Error","Student id must be required",parent=self.root)
+            else:
+                try:
+                    delete=messagebox.askyesno("Student Delete Page","Do you want to delete this student",parent=self.root)
+                    if delete>0:
+                        conn=mysql.connector.connect(host="localhost",username="root",password="@mamun@",database="face_recognizer")
+                        my_cursor=conn.cursor()
+                        sql="delete from student where Student_id=%s"
+                        val=(self.var_std_id.get(),)
+                        my_cursor.execute(sql,val)
+                    else:
+                        if not delete:
+                            return
+
+                    conn.commit()
+                    self.fetch_data()
+                    conn.close()
+                    messagebox.showinfo("Delete","Successfully deleted student details",parent=self.root)
+                except Exception as es:
+                    messagebox.showerror("Error",f"Due To:{str(es)}",parent=self.root)    
+
+
+
+
 
 
 
