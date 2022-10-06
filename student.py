@@ -219,7 +219,7 @@ class Student:
         delete_btn=Button(btn_frame,text="Delete",command=self.delete_data,width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
         delete_btn.grid(row=0,column=2)
 
-        reset_btn=Button(btn_frame,text="Reset",width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
+        reset_btn=Button(btn_frame,text="Reset",command=self.reset_data,width=19,font=("times new roman",12,"bold"),bg="blue",fg="white")
         reset_btn.grid(row=0,column=3)
 
         btn_frame1=Frame(class_Student_frame,bd=2,relief=RIDGE,bg="white")
@@ -450,6 +450,23 @@ class Student:
                     messagebox.showinfo("Delete","Successfully deleted student details",parent=self.root)
                 except Exception as es:
                     messagebox.showerror("Error",f"Due To:{str(es)}",parent=self.root)    
+# ==================reset function==============
+    def reset_data(self):
+        self.var_dep.set("Select Department")
+        self.var_course.set("Select Course")
+        self.var_year.set("Select Year")
+        self.var_semester.set("Select Semester")
+        self.var_std_id.set("")
+        self.var_std_name.set("")
+        self.var_div.set("Select Division")
+        self.var_roll.set("")
+        self.var_gender.set("Male")
+        self.var_dob.set("")
+        self.var_email.set("")
+        self.var_phone.set("")
+        self.var_address.set("")
+        self.var_teacher.set("")
+        self.var_radio1.set("")
 
 
 
