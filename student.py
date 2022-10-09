@@ -34,7 +34,7 @@ class Student:
         # add header images
         # image 1
         img=Image.open(r"C:\attendence-system-using-face-recognition\college_images\facescan.jpg")
-        img=img.resize((500,130),Image.ANTIALIAS)
+        img=img.resize((500,130),Image.Resampling.LANCZOS)
         self.photoimg=ImageTk.PhotoImage(img)
 
         f_lbl=Label(self.root,image=self.photoimg)
@@ -42,7 +42,7 @@ class Student:
 
         # image 2
         img1=Image.open(r"C:\attendence-system-using-face-recognition\college_images\facescan.jpg")
-        img1=img1.resize((500,130),Image.ANTIALIAS)
+        img1=img1.resize((500,130),Image.Resampling.LANCZOS)
         self.photoimg1=ImageTk.PhotoImage(img1)
 
         f_lbl=Label(self.root,image=self.photoimg1)
@@ -50,7 +50,7 @@ class Student:
 
         # image 3
         img2=Image.open(r"C:\attendence-system-using-face-recognition\college_images\facescan.jpg")
-        img2=img2.resize((500,130),Image.ANTIALIAS)
+        img2=img2.resize((500,130),Image.Resampling.LANCZOS)
         self.photoimg2=ImageTk.PhotoImage(img2)
 
         f_lbl=Label(self.root,image=self.photoimg2)
@@ -58,7 +58,7 @@ class Student:
 
         # bg image
         img3=Image.open(r"C:\attendence-system-using-face-recognition\college_images\bg.jpg")
-        img3=img3.resize((1530,710),Image.ANTIALIAS)
+        img3=img3.resize((1530,710),Image.Resampling.LANCZOS)
         self.photoimg3=ImageTk.PhotoImage(img3)
 
         bg_img=Label(self.root,image=self.photoimg3)
@@ -75,7 +75,7 @@ class Student:
         Left_frame.place(x=10,y=10,width=720,height=580)
 
         img_left=Image.open(r"C:\attendence-system-using-face-recognition\college_images\studentdetails.jpg")
-        img_left=img_left.resize((710,130),Image.ANTIALIAS)
+        img_left=img_left.resize((710,130),Image.Resampling.LANCZOS)
         self.photoimg_left=ImageTk.PhotoImage(img_left)
 
         f_lbl=Label(Left_frame,image=self.photoimg_left)
@@ -239,7 +239,7 @@ class Student:
         Right_frame.place(x=740,y=10,width=720,height=580)
 
         img_right=Image.open(r"C:\attendence-system-using-face-recognition\college_images\studentdetails2.jpg")
-        img_right=img_right.resize((710,130),Image.ANTIALIAS)
+        img_right=img_right.resize((710,130),Image.Resampling.LANCZOS)
         self.photoimg_right=ImageTk.PhotoImage(img_right)
 
         f_lbl=Label(Right_frame,image=self.photoimg_right)
