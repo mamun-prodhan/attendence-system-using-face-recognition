@@ -1,11 +1,16 @@
 from tkinter import*
 from tkinter import ttk
 from PIL import Image,ImageTk
+from time import strftime
+from datetime import datetime
+import tkinter
 import os
 from student import Student
 from train import Train
 from face_recognition import Face_Recognition
 from attendance import Attendance
+from developer import Developer
+from help import Help
 
 
 class Face_Recognition_System:
@@ -50,6 +55,12 @@ class Face_Recognition_System:
         title_lbl=Label(bg_img,text="FACE RECOGNITION ATTENDENCE SYSTEM SOFTWARE", font=("times new roman",35,"bold"),bg="white",fg="red")
         title_lbl.place(x=0,y=0,width=1530,height=45)
 
+        # ================time===================
+        
+
+
+
+
         #student button
         img4=Image.open(r"college_images\student.jpg")
         img4=img4.resize((220,220),Image.ANTIALIAS)
@@ -91,10 +102,10 @@ class Face_Recognition_System:
         img7=img7.resize((220,220),Image.ANTIALIAS)
         self.photoimg7=ImageTk.PhotoImage(img7)
 
-        b1=Button(bg_img,image=self.photoimg7,cursor="hand2")
+        b1=Button(bg_img,image=self.photoimg7,cursor="hand2",command=self.help_data)
         b1.place(x=1100,y=100, width=220,height=220)
 
-        b1_1=Button(bg_img,text="Help Desk",cursor="hand2",font=("times new roman",15,"bold"),bg="darkblue",fg="white")
+        b1_1=Button(bg_img,text="Help Desk",cursor="hand2",command=self.help_data,font=("times new roman",15,"bold"),bg="darkblue",fg="white")
         b1_1.place(x=1100,y=300, width=220,height=40)
 
 
@@ -128,10 +139,10 @@ class Face_Recognition_System:
         img10=img10.resize((220,220),Image.ANTIALIAS)
         self.photoimg10=ImageTk.PhotoImage(img10)
 
-        b1=Button(bg_img,image=self.photoimg10,cursor="hand2")
+        b1=Button(bg_img,image=self.photoimg10,cursor="hand2",command=self.developer_data)
         b1.place(x=800,y=380, width=220,height=220)
 
-        b1_1=Button(bg_img,text="Developer",cursor="hand2",font=("times new roman",15,"bold"),bg="darkblue",fg="white")
+        b1_1=Button(bg_img,text="Developer",cursor="hand2",command=self.developer_data,font=("times new roman",15,"bold"),bg="darkblue",fg="white")
         b1_1.place(x=800,y=580, width=220,height=40)
 
         #Exit Button
@@ -139,15 +150,22 @@ class Face_Recognition_System:
         img11=img11.resize((220,220),Image.ANTIALIAS)
         self.photoimg11=ImageTk.PhotoImage(img11)
 
-        b1=Button(bg_img,image=self.photoimg11,cursor="hand2")
+        b1=Button(bg_img,image=self.photoimg11,cursor="hand2",command=self.iExit)
         b1.place(x=1100,y=380, width=220,height=220)
 
-        b1_1=Button(bg_img,text="Exit",cursor="hand2",font=("times new roman",15,"bold"),bg="darkblue",fg="white")
+        b1_1=Button(bg_img,text="Exit",cursor="hand2",command=self.iExit,font=("times new roman",15,"bold"),bg="darkblue",fg="white")
         b1_1.place(x=1100,y=580, width=220,height=40)
 
 
     def open_img(self):
         os.startfile("data")
+
+    def iExit(self):
+        self.iExit=tkinter.messagebox.askyesno("Face Recognition", "Are you sure exit this project",parent=self.root)
+        if self.iExit >0:
+            self.root.destroy()
+        else:
+            return
 
     # ===============Functions buttons ================
    
@@ -166,6 +184,14 @@ class Face_Recognition_System:
     def attendance_data(self):
         self.new_window=Toplevel(self.root)
         self.app=Attendance(self.new_window)
+
+    def developer_data(self):
+        self.new_window=Toplevel(self.root)
+        self.app=Developer(self.new_window)
+
+    def help_data(self):
+        self.new_window=Toplevel(self.root)
+        self.app=Help(self.new_window)
 
 
 
