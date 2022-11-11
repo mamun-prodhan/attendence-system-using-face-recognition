@@ -56,7 +56,14 @@ class Face_Recognition_System:
         title_lbl.place(x=0,y=0,width=1530,height=45)
 
         # ================time===================
-        
+        def time():
+            string = strftime('%H:%M:%S %p')
+            lbl.config(text = string)
+            lbl.after(1000, time)
+
+        lbl = Label(title_lbl, font = ('times new roman',14,'bold'),background='white',foreground='blue')
+        lbl.place(x=0,y=0,width=110,height=50)
+        time()
 
 
 
