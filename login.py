@@ -183,7 +183,7 @@ class Login_Window:
                 self.txt_newpass.place(x=50,y=250,width=250)
 
                 btn=Button(self.root2,text="Reset",command=self.reset_pass,font=("times new roman",15,"bold"),bg="green",fg="white")
-                btn.place(x=100,y=290)
+                btn.place(x=110,y=290,width=130)
 
 
 
