@@ -70,7 +70,7 @@ class Login_Window:
         registerbtn.place(x=15,y=350,width=160)
 
         # forgetpassbtn
-        registerbtn=Button(frame,text="Forget Password",font=("times new roman",10,"bold"),borderwidth=0,fg="white",bg="black", activeforeground="white",activebackground="black")
+        registerbtn=Button(frame,text="Forget Password",command=self.forgot_password_window,font=("times new roman",10,"bold"),borderwidth=0,fg="white",bg="black", activeforeground="white",activebackground="black")
         registerbtn.place(x=10,y=370,width=160)
 
     def register_window(self):
@@ -105,7 +105,90 @@ class Login_Window:
             conn.commit()
             self.clear()
             conn.close()
-                    # ===================================== connect attendance management app
+    # ===================================== connect attendance management app
+    # ===================================== reset password
+    def reset_pass(self):
+        if self.combo_security_Q.get()=="Select":
+            messagebox.showerror("Error","Select the Security Questions")
+        elif self.txt_security.get()=="":
+            messagebox.showerror("Error","Please enter the answer")
+        elif self.txt_newpass.get()=="":
+            messagebox.showerror("Error","Please enter the new password")
+        else:
+            conn=mysql.connector.connect(host="localhost",user="root",password="@mamun@",database="face_recognizer")
+            my_cursor=conn.cursor()
+            qury=("select * from register where email=%s and securityQ=%s and securityA=%s")
+            vlaue=(self.txtuser.get(),self.combo_security_Q.get(),self.txt_security.get(),)
+            my_cursor.execute(qury,vlaue)
+            row=my_cursor.fetchone()
+            if row==None:
+                messagebox.showerror("Error","Please enter the correct answer")
+            else:
+                query=("update register set password=%s where email=%s")
+                value=(self.txt_newpass.get(),self.txtuser.get())
+                my_cursor.execute(query,value)
+
+                conn.commit()
+                conn.close()
+                messagebox.showinfo("Info","Your Password has been reset, please login new password")
+
+
+    # =======================================forgot password window
+    def forgot_password_window(self):
+        if self.txtuser.get()=="":
+            messagebox.showerror("Error","Please Enter the Email address to reset password")
+        else:
+            conn=mysql.connector.connect(host="localhost",user="root",password="@mamun@",database="face_recognizer")
+            my_cursor=conn.cursor()
+            query=("select * from register where email=%s")
+            value=(self.txtuser.get(),)
+            my_cursor.execute(query,value)
+            row=my_cursor.fetchone()
+            # print(row)
+
+            if row==None:
+                messagebox.showerror("Error","Please enter the valid user name")
+            else:
+                conn.close()
+                self.root2=Toplevel()
+                self.root2.title("Forgot Password")
+                self.root2.geometry("340x450+610+170")
+
+                l=Label(self.root2,text="Forgot Password",font=("times new roman",20,"bold"),fg="red",bg="white")
+                l.place(x=0,y=10,relwidth=1)
+
+                security_Q=Label(self.root2,text="Select Security Questions",font=("times new roman",15,"bold"),bg="white",fg="black")
+                security_Q.place(x=50,y=80)
+
+                self.combo_security_Q=ttk.Combobox(self.root2,font=("times new roman",15,"bold"),state="readonly")
+                self.combo_security_Q["values"]=("Select","Your Birth Place","Your Girlfriend Name","Your Pet Name")
+                self.combo_security_Q.place(x=50,y=110,width=250)
+                self.combo_security_Q.current(0)
+
+
+
+                security_A=Label(self.root2,text="Security Answer",font=("times new roman",15,"bold"),bg="white",fg="black")
+                security_A.place(x=50,y=150)
+
+                self.txt_security=ttk.Entry(self.root2,font=("times new roman",15))
+                self.txt_security.place(x=50,y=180,width=250)
+
+
+                new_password=Label(self.root2,text="New Password",font=("times new roman",15,"bold"),bg="white",fg="black")
+                new_password.place(x=50,y=220)
+
+                self.txt_newpass=ttk.Entry(self.root2,font=("times new roman",15))
+                self.txt_newpass.place(x=50,y=250,width=250)
+
+                btn=Button(self.root2,text="Reset",command=self.reset_pass,font=("times new roman",15,"bold"),bg="green",fg="white")
+                btn.place(x=100,y=290)
+
+
+
+
+
+
+
 
 
 
