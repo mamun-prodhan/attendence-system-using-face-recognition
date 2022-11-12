@@ -109,11 +109,11 @@ class Login_Window:
     # ===================================== reset password
     def reset_pass(self):
         if self.combo_security_Q.get()=="Select":
-            messagebox.showerror("Error","Select the Security Questions")
+            messagebox.showerror("Error","Select the Security Questions",parent=self.root2)
         elif self.txt_security.get()=="":
-            messagebox.showerror("Error","Please enter the answer")
+            messagebox.showerror("Error","Please enter the answer",parent=self.root2)
         elif self.txt_newpass.get()=="":
-            messagebox.showerror("Error","Please enter the new password")
+            messagebox.showerror("Error","Please enter the new password",parent=self.root2)
         else:
             conn=mysql.connector.connect(host="localhost",user="root",password="@mamun@",database="face_recognizer")
             my_cursor=conn.cursor()
@@ -122,7 +122,7 @@ class Login_Window:
             my_cursor.execute(qury,vlaue)
             row=my_cursor.fetchone()
             if row==None:
-                messagebox.showerror("Error","Please enter the correct answer")
+                messagebox.showerror("Error","Please enter the correct answer",parent=self.root2)
             else:
                 query=("update register set password=%s where email=%s")
                 value=(self.txt_newpass.get(),self.txtuser.get())
@@ -130,7 +130,9 @@ class Login_Window:
 
                 conn.commit()
                 conn.close()
-                messagebox.showinfo("Info","Your Password has been reset, please login new password")
+                messagebox.showinfo("Info","Your Password has been reset, please login new password",parent=self.root2)
+                self.root2.destroy()
+
 
 
     # =======================================forgot password window
@@ -304,7 +306,7 @@ class Register:
         img1=Image.open(r"C:\attendence-system-using-face-recognition\college_images\loginbtn2.png")
         img1=img1.resize((200,50),Image.ANTIALIAS)
         self.photoimage1=ImageTk.PhotoImage(img1)
-        b1=Button(frame,image=self.photoimage1,borderwidth=0,cursor="hand2")
+        b1=Button(frame,image=self.photoimage1,command=self.return_login,borderwidth=0,cursor="hand2")
         b1.place(x=365,y=420,width=200)
 
 
@@ -312,11 +314,11 @@ class Register:
 
     def register_data(self):
         if self.var_fname.get()=="" or self.var_email.get()=="" or self.var_securityQ.get()=="Select":
-            messagebox.showerror("Error","All fields are required")
+            messagebox.showerror("Error","All fields are required",parent=self.root)
         elif self.var_pass.get()!=self.var_confpass.get():
-            messagebox.showerror("Error","Password & Confirm Password must be same")
+            messagebox.showerror("Error","Password & Confirm Password must be same",parent=self.root)
         elif self.var_check.get()==0:
-            messagebox.showerror("Error","Please Agree the Terms & Conditions")
+            messagebox.showerror("Error","Please Agree the Terms & Conditions",parent=self.root)
         else:
             conn=mysql.connector.connect(host="localhost",user="root",password="@mamun@",database="face_recognizer")
             my_cursor=conn.cursor()
@@ -325,7 +327,7 @@ class Register:
             my_cursor.execute(query,value)
             row=my_cursor.fetchone()
             if row!=None:
-                messagebox.showerror("Error","User already exists with this Email, Please try another Email")
+                messagebox.showerror("Error","User already exists with this Email, Please try another Email",parent=self.root)
             else:
                 my_cursor.execute("insert into register values(%s,%s,%s,%s,%s,%s,%s)",(
                                                                                         self.var_fname.get(),
@@ -338,7 +340,10 @@ class Register:
                                                                                      ))
             conn.commit()
             conn.close()
-            messagebox.showinfo("Success","Register Successfully")
+            messagebox.showinfo("Success","Register Successfully",parent=self.root)
+
+    def return_login(self):
+        self.root.destroy()
 
 
 
