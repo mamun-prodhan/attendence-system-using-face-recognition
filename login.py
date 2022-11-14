@@ -80,8 +80,8 @@ class Login_Window:
     def login(self):
         if self.txtuser.get()=="" or self.txtpass.get()=="":
             messagebox.showerror("Error","All fields required")
-        elif self.txtuser.get()=="mamun" and self.txtpass.get()=="dipu":
-            messagebox.showinfo("Success","Welcome to Our System")
+        # elif self.txtuser.get()=="mamun" and self.txtpass.get()=="dipu":
+        #     messagebox.showinfo("Success","Welcome to Our System")
         else:
             conn=mysql.connector.connect(host="localhost",user="root",password="@mamun@",database="face_recognizer")
             my_cursor=conn.cursor()
